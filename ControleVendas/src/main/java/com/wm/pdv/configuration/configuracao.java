@@ -1,5 +1,7 @@
 package com.wm.pdv.configuration;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +18,12 @@ import com.wm.pdv.model.dao.repository.OrdemVendaRepository;
 import com.wm.pdv.model.dao.repository.ProdutoRepository;
 import com.wm.pdv.model.dao.repository.TelefoneRepository;
 import com.wm.pdv.model.dao.service.CodigoPostalService;
-import com.wm.pdv.model.entities.ContasPagar;
+import com.wm.pdv.model.entities.Cliente;
+import com.wm.pdv.model.entities.Endereco;
+import com.wm.pdv.model.entities.Telefone;
+import com.wm.pdv.model.entities.enums.ETipoEndereco;
+import com.wm.pdv.model.entities.enums.ETipoRegistro;
+import com.wm.pdv.model.entities.enums.ETipoTelefone;
 
 @Configuration
 public class configuracao implements CommandLineRunner {
@@ -127,8 +134,8 @@ public class configuracao implements CommandLineRunner {
 		
 		
         
-        
-		/*
+		/*    
+		
 		Cliente cli1 = new  Cliente("Wellington", "10619671742", ETipoRegistro.CPF, "wfmzipi@gmail.com");
 		Cliente cli2 = new Cliente("Gisele", "10482275431", ETipoRegistro.CPF, "gislef_rocha@yahoo.com");
 				
@@ -137,6 +144,11 @@ public class configuracao implements CommandLineRunner {
 		Telefone telclie3 = new Telefone("111111111", ETipoTelefone.CELULAR,cli2);
 		Telefone telclie4 = new Telefone("222222222", ETipoTelefone.CELULAR,cli2);
 		
+		clienterepository.saveAll(Arrays.asList(cli1,cli2));
+		telefonerepository.saveAll(Arrays.asList(telclie1,telclie2,telclie3,telclie4));	
+		
+		
+	
 		Endereco endcli1 = new Endereco("casa","165",ETipoEndereco.RESIDENCIAL,cep1,cli1);
 		Endereco endcli2 = new Endereco("predio","140",ETipoEndereco.RESIDENCIAL,cep2,cli2);
 		Endereco endcli3 = new Endereco("casa","105",ETipoEndereco.RESIDENCIAL,cep2,cli1);

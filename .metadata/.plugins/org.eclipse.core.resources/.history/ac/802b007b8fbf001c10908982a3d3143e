@@ -1,0 +1,37 @@
+package com.wm.sistemacomercial.model.dao.service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wm.sistemacomercial.model.dao.repository.OrdemCompraRepository;
+import com.wm.sistemacomercial.model.dao.service.exception.ResourceNotFoundExcepetion;
+import com.wm.sistemacomercial.model.entities.OrdemCompra;
+
+@Service
+public class OrdemCompraService {
+	
+	@Autowired
+	private OrdemCompraRepository repository;
+	
+	public List<OrdemCompra> findAll(){		
+		return repository.findAll();
+	}
+	
+	public OrdemCompra findById(long id) {
+		Optional<OrdemCompra> obj = repository.findById(id);		
+		return obj.orElseThrow(() -> new ResourceNotFoundExcepetion(id));
+	}
+	
+	public List<OrdemCompra> findByDataCompra(Date data_compra) {
+		List<OrdemCompra> obj = repository.findByDataCompra(data_compra);	
+		return  obj;
+	}
+	
+
+	
+	
+}

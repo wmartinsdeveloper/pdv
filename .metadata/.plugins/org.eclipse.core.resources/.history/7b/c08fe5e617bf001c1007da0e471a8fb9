@@ -1,0 +1,105 @@
+package com.wm.sistemacomercial.model.entities;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+@Entity(name = "Produto")
+public class Produto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_PRODUTO")
+	private Long idproduto;
+
+	@Column(name = "NOME")
+	private String nome;
+
+	@Column(name = "QUANTIDADE")
+	private int quantidade;
+
+	@Column(name = "PRECO_COMPRA")
+	private Double precocompra;
+
+	@Column(name = "MARGEM")
+	private Double margem;
+
+	@Column(name = "PRECO_VENDA")
+	private Double precovenda;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "PRODUTO_FORNECEDOR", joinColumns = {
+			@JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID_PRODUTO") }, inverseJoinColumns = {
+					@JoinColumn(name = "ID_FORNECEDOR", referencedColumnName = "ID_FORNECEDOR") })
+	private List<Fornecedor> fornecedor;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "PRODUTO_FABRICANTE", joinColumns = {
+			@JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID_PRODUTO") }, inverseJoinColumns = {
+					@JoinColumn(name = "ID_FABRICANTE", referencedColumnName = "ID_FABRICANTE") })
+	private List<Fabricante> fabricante;
+
+	public Produto() {
+	};
+
+	public Produto(String nome, int quantidade, Double precocompra, Double margem, Double precovenda) {
+		this.nome = nome;
+		this.quantidade = quantidade;
+		this.precocompra = precocompra;
+		this.margem = margem;
+		this.precovenda = precovenda;
+	}
+
+	public Produto(String nome, int quantidade, Double precocompra, Double margem, Double precovenda,
+			List<Fornecedor> fornecedor) {
+		this.nome = nome;
+		this.quantidade = quantidade;
+		this.precocompra = precocompra;
+		this.margem = margem;
+		this.precovenda = precovenda;
+		this.fornecedor = fornecedor;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [Nome=" + nome + ", Quantidade=" + quantidade + ", PrecoCompra=" + precocompra + ", Margem="
+				+ margem + ", PrecoVenda=" + precovenda + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+
+}

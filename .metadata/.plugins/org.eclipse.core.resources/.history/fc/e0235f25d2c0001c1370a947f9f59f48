@@ -1,0 +1,4 @@
+spring.profiles.active=mysql
+
+spring.jpa.open-in-view=true
+spring.jpa.properties.hibernate.format_sql=true

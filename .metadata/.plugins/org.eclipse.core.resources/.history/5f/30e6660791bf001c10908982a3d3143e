@@ -1,0 +1,29 @@
+package com.wm.sistemacomercial.model.dao.repository;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.wm.sistemacomercial.model.entities.OrdemCompra;
+
+@Repository
+public interface OrdemCompraRepository extends JpaRepository<OrdemCompra, Long> {
+	
+
+	public List<OrdemCompra> findByDataCompra(@Param("data_compra") Date data_compra);
+	
+	public List<OrdemCompra> findByDataPagamento(@Param("data_pagamento") Date data_pagamento);	
+	
+	public List<OrdemCompra> findByStatus(@Param("status") String status);
+	
+	public List<OrdemCompra> findByData_CompraBetween(@Param("DataInicial") Date DataInicial,@Param("DataFim") Date DataFim);
+	
+	public List<OrdemCompra> findByData_PagamentoBetween(@Param("DataInicial") Date DataInicial,@Param("DataFim") Date DataFim);
+	
+	public List<OrdemCompra> findByData_CompraBetweenAndStatus(@Param("DataInicial") Date DataInicial,@Param("DataFim") Date DataFim,@Param("Status") Date Status);	
+	
+}
